@@ -125,6 +125,7 @@
         android:textColor="#537CE6"
         android:textSize="20sp"
         android:onClick="doLogin"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.19"

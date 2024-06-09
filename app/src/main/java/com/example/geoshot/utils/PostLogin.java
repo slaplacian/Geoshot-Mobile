@@ -1,4 +1,4 @@
-package com.example.geoshot;
+package com.example.geoshot.utils;
 
 public class PostLogin implements PostStrategy{
     private static final String URL_LOGIN = "http://192.168.0.42:8080/api/login";
