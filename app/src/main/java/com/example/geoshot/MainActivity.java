@@ -6,6 +6,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -25,6 +26,7 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     private EditText username;
     private EditText senha;
+    private TextView errorMessage;
 
 
     @Override
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         senha = findViewById(R.id.senha);
+        errorMessage = findViewById(R.id.errorMessage);
 
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -54,30 +57,33 @@ public class MainActivity extends AppCompatActivity {
         APIClient api = new APIClient();
         api.setPostStrategy(new PostLogin(user));
         String response = api.postRequest();
-        Log.d("ResponseLogin", response);
+        Log.d("Depurando", "Resposta da API: " + response);
 
         JSONObject json;
-        String status;
-        String message="";
-        String userOnSuccess="";
+        String status = "";
+        String message = "";
+        String userOnSuccess = "";
         try {
             json = new JSONObject(response);
             status = json.getString("status");
             userOnSuccess = json.getString("username");
-            if(status.equals("\"error\"")){
+            if(status.equals("error")){
                 message = json.getString("message");
             }
         } catch (JSONException e) {
-            throw new RuntimeException(e);
+            Log.d("Depurando", "Erro em doLogin MainActivity: JSONException: " + e.getMessage());
         }
 
         if (status.equals("error")){
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            errorMessage.setText(R.string.invalid_login);
+            this.username.setText("");
+            senha.setText("");
         }
-
-        Intent intent = new Intent(this, BaseActivity.class);
-        intent.putExtra("username", userOnSuccess);
-        startActivity(intent);
+        else {
+            Intent intent = new Intent(this, BaseActivity.class);
+            intent.putExtra("username", userOnSuccess);
+            startActivity(intent);
+        }
     }
 
     public void cadastrarse(View view) {

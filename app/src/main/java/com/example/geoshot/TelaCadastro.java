@@ -78,7 +78,7 @@ public class TelaCadastro extends AppCompatActivity {
         }
     }
 
-    public void doLogin(View v) {
+    public void goToLogin(View v) {
         finish();
     }
 }

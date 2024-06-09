@@ -13,7 +13,6 @@ public class APIClient {
     }
 
     public String postRequest() {
-
         OkHttpClient client = new OkHttpClient();
 
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
@@ -32,13 +31,13 @@ public class APIClient {
                 assert response.body() != null;
                 return response.body().string();
             } else {
-                Log.d("APIClientError", "Erro: " + response.code());
+                Log.d("Depurando", "APIClientError: responseisNotSuccessful: " + response.code());
 
                 throw new IOException("Erro: " + response.code());
             }
         }
         catch (IOException e ) {
-            Log.d("APIClientError", "Erro: RuntimeException");
+            Log.d("Depurando", "APIClientError: RuntimeException");
             throw new RuntimeException(e);
         }
     }
