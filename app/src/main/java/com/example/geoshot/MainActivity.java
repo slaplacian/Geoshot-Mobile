@@ -59,22 +59,25 @@ public class MainActivity extends AppCompatActivity {
         JSONObject json;
         String status;
         String message="";
+        String userOnSuccess="";
         try {
             json = new JSONObject(response);
             status = json.getString("status");
-            if(status.equals("error")){
+            userOnSuccess = json.getString("username");
+            if(status.equals("\"error\"")){
                 message = json.getString("message");
             }
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
 
-        if(status.equals("success")){
-            Toast.makeText(this, "Deu certo!", Toast.LENGTH_LONG).show();
-        }
-        else if (status.equals("error")){
+        if (status.equals("error")){
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         }
+
+        Intent intent = new Intent(this, BaseActivity.class);
+        intent.putExtra("username", userOnSuccess);
+        startActivity(intent);
     }
 
     public void cadastrarse(View view) {
