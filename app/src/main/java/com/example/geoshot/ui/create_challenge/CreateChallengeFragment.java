@@ -1,4 +1,4 @@
-package com.example.geoshot.ui.search;
+package com.example.geoshot.ui.create_challenge;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.geoshot.R;
-import com.example.geoshot.databinding.FragmentSearchBinding;
+import com.example.geoshot.databinding.FragmentCretateChallengeBinding;
 
-public class SearchFragment extends Fragment {
+public class CreateChallengeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return inflater.inflate(R.layout.fragment_cretate_challenge, container, false);
     }
 }

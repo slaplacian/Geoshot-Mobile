@@ -16,23 +16,10 @@ import com.example.geoshot.R;
 
 public class PerfilFragment extends Fragment {
 
-    private PerfilViewModel mViewModel;
-
-    public static PerfilFragment newInstance() {
-        return new PerfilFragment();
-    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_perfil, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(PerfilViewModel.class);
-        // TODO: Use the ViewModel
     }
 
 }
