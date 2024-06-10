@@ -1,4 +1,4 @@
-package com.example.geoshot.ui.create_challenge;
+package com.example.geoshot.ui.createChallenge;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
