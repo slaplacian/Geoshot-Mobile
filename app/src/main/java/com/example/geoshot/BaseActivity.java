@@ -24,8 +24,6 @@ public class BaseActivity extends AppCompatActivity {
     private CreateChallengeFragment createChallengeFragment = new CreateChallengeFragment();
     private PerfilFragment perfilFragment = new PerfilFragment();
 
-    private boolean a,b,c,d;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
