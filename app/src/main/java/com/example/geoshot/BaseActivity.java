@@ -1,6 +1,7 @@
 package com.example.geoshot;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.geoshot.ui.create_challenge.CreateChallengeFragment;
@@ -18,19 +19,27 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class BaseActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
-    private HomeFragment homeFragment = new HomeFragment();
-    private SearchFragment searchFragment = new SearchFragment();
-    private CreateChallengeFragment createChallengeFragment = new CreateChallengeFragment();
-    private PerfilFragment perfilFragment = new PerfilFragment();
+    private final HomeFragment homeFragment = new HomeFragment();
+    private final SearchFragment searchFragment = new SearchFragment();
+    private final CreateChallengeFragment createChallengeFragment = new CreateChallengeFragment();
+    private final PerfilFragment perfilFragment = new PerfilFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        bottomNavigationView  = findViewById(R.id.bottom_navigation);
+        String loggedUsername = getIntent().getStringExtra("username");
+        Log.d("Depurando", "BaseActivity -> onCreate -> LoggedUser -> " + loggedUsername);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("username", loggedUsername);
+        homeFragment.setArguments(bundle);
+        searchFragment.setArguments(bundle);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         loadFragment(homeFragment, true);
+        Log.d("Depurando", "BaseActivity -> onCreate -> Navegando para home...");
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -66,7 +75,7 @@ public class BaseActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.container, fragment);
         }
 
-        fragmentTransaction.replace(R.id.container, fragment);
+//        fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
     }
 }
