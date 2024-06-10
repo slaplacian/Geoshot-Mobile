@@ -28,7 +28,8 @@ public class APIClient {
         try (Response response = client.newCall(request).execute()) {
             if (response.isSuccessful()) {
                 assert response.body() != null;
-                return response.body().string();
+                String resposta = response.body().string();
+                return resposta;
             } else {
                 Log.d("Depurando", "APIClientError -> postRequest -> responseisNotSuccessful: " + response.code());
 
@@ -36,24 +37,24 @@ public class APIClient {
             }
         }
         catch (IOException e ) {
-            Log.d("Depurando", "APIClientError -> postRequest -> RuntimeException");
+            Log.d("Depurando", "APIClientError -> postRequest -> IOException");
             throw new RuntimeException(e);
         }
     }
 
     public String getRequest(String username) {
 
-        String url = "http://"+ R.string.IP_SERVER_ADDRESS + ":8080/api/initial-page?username=" + username;
+        String url = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/initial-page?username=" + username;
 
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
+        Request request = new Request.Builder().url(url).build();
 
         try {
             Response response = client.newCall(request).execute();
-            assert response.body() != null;
-            return response.body().string();
+            String resposta = response.body().string();
+            Log.d("Depurando", "APIClient -> getRequest -> Olha o response: " + resposta);
+            return resposta;
         } catch (Exception e ) {
+            Log.d("Depurando", "APIClient -> getRequest  -> Erro no response " + e.toString());
             return e.toString();
         }
     }

@@ -19,5 +19,4 @@
     <string name="create_challenge">Create Challenge</string>
     <string name="perfil_do_usu_rio">Perfil do Usuário</string>
     <string name="invalid_login">Usuário ou senha incorretos!</string>
-    <string name="IP_SERVER_ADDRESS">192.168.0.42</string>
 </resources>

@@ -36,7 +36,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.feed_item_layout, parent, false);
 
-        return new ViewHolder(view);
+        Adapter.ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
@@ -45,9 +46,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         ImageUtils.setImageToImageView(holder, item.getPhoto(), holder.challengeImage);
         ImageUtils.setImageToImageView(holder, item.getUserPhoto(), holder.userPhoto);
-        holder.username.setText(item.getUsername());
+        holder.frameUsername.setText(item.getUsername());
         holder.criadoEm.setText(item.getDateOfCreation());
-        holder.pubId.setText(item.getPubId());
+        holder.pubId.setText(String.valueOf(item.getPubId()));
     }
     @Override
     public int getItemCount() {
@@ -56,12 +57,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView userPhoto, challengeImage;
-        TextView username, criadoEm, pubId;
+        TextView frameUsername, criadoEm, pubId;
         public ViewHolder(View view) {
             super(view);
             userPhoto = (ImageView) view.findViewById(R.id.userPhoto);
             challengeImage = (ImageView) view.findViewById(R.id.challengeImage);
-            username = (TextView) view.findViewById(R.id.username);
+            frameUsername = (TextView) view.findViewById(R.id.frameUsername);
             criadoEm = (TextView) view.findViewById(R.id.criadoEm);
             pubId = (TextView) view.findViewById(R.id.pubId);
         }

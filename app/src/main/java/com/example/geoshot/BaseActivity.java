@@ -1,6 +1,7 @@
 package com.example.geoshot;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.example.geoshot.ui.create_challenge.CreateChallengeFragment;
@@ -29,13 +30,16 @@ public class BaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_base);
 
         String loggedUsername = getIntent().getStringExtra("username");
+        Log.d("Depurando", "BaseActivity -> onCreate -> LoggedUser -> " + loggedUsername);
+
         Bundle bundle = new Bundle();
-        bundle.putString("loggedUser", loggedUsername);
+        bundle.putString("username", loggedUsername);
         homeFragment.setArguments(bundle);
         searchFragment.setArguments(bundle);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         loadFragment(homeFragment, true);
+        Log.d("Depurando", "BaseActivity -> onCreate -> Navegando para home...");
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -71,7 +75,7 @@ public class BaseActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.container, fragment);
         }
 
-        fragmentTransaction.replace(R.id.container, fragment);
+//        fragmentTransaction.replace(R.id.container, fragment);
         fragmentTransaction.commit();
     }
 }
