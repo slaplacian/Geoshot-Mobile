@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.geoshot.ui.create_challenge.CreateChallengeFragment;
+import com.example.geoshot.ui.createChallenge.CreateChallengeFragment;
 import com.example.geoshot.ui.home.HomeFragment;
 import com.example.geoshot.ui.perfil.PerfilFragment;
 import com.example.geoshot.ui.search.SearchFragment;
@@ -15,8 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import com.google.android.material.navigation.NavigationBarView;
 
 public class BaseActivity extends AppCompatActivity {
     private final HomeFragment homeFragment = new HomeFragment();
