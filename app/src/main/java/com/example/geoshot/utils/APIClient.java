@@ -9,13 +9,13 @@ import java.io.IOException;
 
 public class APIClient {
     private static PostStrategy strategy;
+    private static final OkHttpClient client = new OkHttpClient();
 
     public void setPostStrategy(PostStrategy strategy) {
         APIClient.strategy = strategy;
     }
 
     public String postRequest() {
-        OkHttpClient client = new OkHttpClient();
         MediaType JSON = MediaType.get("application/json; charset=utf-8");
         String json = strategy.json();
         RequestBody body = RequestBody.create(json, JSON);
@@ -42,7 +42,6 @@ public class APIClient {
     }
 
     public String getRequest(String username) {
-        OkHttpClient client = new OkHttpClient();
 
         String url = "http://"+ R.string.IP_SERVER_ADDRESS + ":8080/api/initial-page?username=" + username;
 

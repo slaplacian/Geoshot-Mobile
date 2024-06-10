@@ -38,43 +38,49 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 StrictMode.ThreadPolicy .Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        APIClient api = new APIClient();
-        String response = api.getRequest("xida");
-
-        parseJson(response);
+        onClick(this.getView());
 
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
     @Override
     public void onClick(View v) {
+        String loggedUser = getArguments().getString("loggedUser");
 
+        APIClient api = new APIClient();
+        String response = api.getRequest(loggedUser);
+
+        parseJson(response);
     }
 
     private void parseJson(String jsonText ) {
         try {
-            JSONObject json = new JSONObject( jsonText);
-            JSONArray feedlist = json.getJSONArray( "feedlist");
-            for (int i=0; i<feedlist.length(); i++) {
-                JSONObject row = feedlist.getJSONObject(i);
-                String pubId = row.getString( "pubId");
-                String photo = row.getString( "photo" );
-                String userPhoto = row.getString( "userPhoto");
-                String dateOfCreation = row.getString( "dateOfCreation");
-                String username = row.getString( "username");
+            JSONObject json = new JSONObject(jsonText);
 
-                int intpubId = Integer.parseInt(pubId);
+            if (json.getString("status").equals("success")) {
+                JSONArray feedlist = json.getJSONArray("feedlist");
 
-                int insertIndex = feedList.size();
-                feedList.add(insertIndex , new FeedItem(intpubId, photo, userPhoto, dateOfCreation, username));
-                adapter.notifyItemInserted( insertIndex );
+                for (int i = 0; i < feedlist.length(); i++) {
+                    JSONObject row = feedlist.getJSONObject(i);
+                    String pubId = row.getString("pubId");
+                    String photo = row.getString("photo");
+                    String userPhoto = row.getString("userPhoto");
+                    String dateOfCreation = row.getString("dateOfCreation");
+                    String username = row.getString("username");
+
+                    int intpubId = Integer.parseInt(pubId);
+
+                    int insertIndex = feedList.size();
+                    feedList.add(insertIndex, new FeedItem(intpubId, photo, userPhoto, dateOfCreation, username));
+                    adapter.notifyItemInserted(insertIndex);
+                }
             }
         } catch (JSONException e ) {
-            Log.d("Depurando", "Erro em parseJson BaseActivity: JSONException: " + e.getMessage());
+            Log.d("Depurando", "Erro em parseJson -> BaseActivity -> JSONException: " + e.getMessage());
             throw new RuntimeException(e);
         }
         catch (NumberFormatException e) {
-            Log.d("Depurando", "Erro em parseJson BaseActivity: NumberFormatException: " + e.getMessage());
+            Log.d("Depurando", "Erro em parseJson -> BaseActivity -> NumberFormatException: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }

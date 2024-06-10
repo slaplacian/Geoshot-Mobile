@@ -23,8 +23,8 @@ import coil.request.ImageRequest;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
     Context context;
-    ArrayList feedItems;
-    public Adapter(Context context, ArrayList feedItems) {
+    ArrayList<FeedItem> feedItems;
+    public Adapter(Context context, ArrayList<FeedItem> feedItems) {
         this.context = context;
         this.feedItems = feedItems;
     }

@@ -18,18 +18,23 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class BaseActivity extends AppCompatActivity {
-    private BottomNavigationView bottomNavigationView;
-    private HomeFragment homeFragment = new HomeFragment();
-    private SearchFragment searchFragment = new SearchFragment();
-    private CreateChallengeFragment createChallengeFragment = new CreateChallengeFragment();
-    private PerfilFragment perfilFragment = new PerfilFragment();
+    private final HomeFragment homeFragment = new HomeFragment();
+    private final SearchFragment searchFragment = new SearchFragment();
+    private final CreateChallengeFragment createChallengeFragment = new CreateChallengeFragment();
+    private final PerfilFragment perfilFragment = new PerfilFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        bottomNavigationView  = findViewById(R.id.bottom_navigation);
+        String loggedUsername = getIntent().getStringExtra("username");
+        Bundle bundle = new Bundle();
+        bundle.putString("loggedUser", loggedUsername);
+        homeFragment.setArguments(bundle);
+        searchFragment.setArguments(bundle);
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         loadFragment(homeFragment, true);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
