@@ -1,4 +1,4 @@
-package com.example.geoshot.generalUtilities;
+package com.example.geoshot.utils;
 
 public class User {
     private final String nome;

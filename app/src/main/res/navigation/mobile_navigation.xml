@@ -38,9 +38,9 @@
 
     <fragment
         android:id="@+id/solvedByMe"
-        android:name="com.example.geoshot.ui.myAttempts.MyAttemptsFragment"
+        android:name="com.example.geoshot.ui.solvedByMe.SolvedByMeFragment"
         android:label="My Challenges"
-        tools:layout="@layout/fragment_my_attempts" />
+        tools:layout="@layout/fragment_solved_by_me" />
 
     <fragment
         android:id="@+id/editProfile"
