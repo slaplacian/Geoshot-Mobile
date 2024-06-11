@@ -14,8 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.ui.home.utils.FeedItem;
-import com.example.geoshot.utils.APIClient;
-import com.example.geoshot.utils.sqlite.SessionManager;
+import com.example.geoshot.generalUtilities.APIClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,16 +22,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
-
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
-    private Adapter adapter;
+    private HomeAdapter homeAdapter;
     private final ArrayList<FeedItem> feedList = new ArrayList<>();
-    private OkHttpClient client;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,21 +47,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
 
         // Sending reference and data to Adapter
-        adapter = new Adapter(getContext(), feedList);
-        recyclerView.setAdapter(adapter);
+        homeAdapter = new HomeAdapter(getContext(), feedList);
+        recyclerView.setAdapter(homeAdapter);
 
-        //String loggedUser = "vazio";
-
-        String loggedUser = SessionManager.getSession(this.getContext());
-
-        if (loggedUser.equals("DEU RUIM")) {
+        String loggedUser = "vazio";
+        if (getArguments() == null) {
             Log.d("Depurando", "HomeFragment -> onViewCreated -> getArguments returned null ## ");
+        } else {
+            loggedUser = getArguments().getString("username");
         }
-
         Log.d("Depurando", "LoggedUser -> " + loggedUser);
 
         APIClient api = new APIClient();
-        String response = api.getRequest(loggedUser);
+        String response = api.getRequest("xida");
 
         parseJson(response);
     }
@@ -82,7 +73,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void parseJson(String jsonText) {
 //        Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no parseJson");
         try {
-            feedList.clear();
             JSONObject json = new JSONObject(jsonText);
 //            Log.d("Depurando", "HomeFragment -> parseJson -> Consegui transformar jsonText em json");
             if(json.has("feedlist") && json.get("feedlist") instanceof JSONArray) {
@@ -101,7 +91,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     feedList.add(insertIndex, new FeedItem(pubId, photo, userPhoto, dateOfCreation, username));
                     Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + feedList.size());
 //                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
-                    adapter.notifyItemInserted(insertIndex);
+                    homeAdapter.notifyItemInserted(insertIndex);
                 }
             } else {
                 Log.d("Depurando", "HomeFragment -> parseJson -> 'feedlist' não é um array ou não existe");
