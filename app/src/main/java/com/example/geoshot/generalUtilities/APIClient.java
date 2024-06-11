@@ -42,9 +42,14 @@ public class APIClient {
         }
     }
 
-    public String getRequest(String username) {
-
-        String url = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/initial-page?username=" + username;
+    public String getRequest(String praonde) {
+        String url = "";
+        if (praonde.equals("home")){
+            url = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/initial-page?username=xida";
+        }
+        else if (praonde.equals("search")){
+            url = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/search?username=xida&searched-username=ito";
+        }
 
         Request request = new Request.Builder().url(url).build();
 
