@@ -14,9 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.geoshot.R;
-import com.example.geoshot.ui.home.utils.FeedItem;
 import com.example.geoshot.ui.myAttempts.utils.MyAttemptItem;
-import com.example.geoshot.utils.APIClient;
+import com.example.geoshot.generalUtilities.APIClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,20 +61,22 @@ public class MyAttempts extends Fragment {
         try {
             JSONObject json = new JSONObject(jsonText);
 //            Log.d("Depurando", "HomeFragment -> parseJson -> Consegui transformar jsonText em json");
-            if(json.has("feedlist") && json.get("feedlist") instanceof JSONArray) {
-                JSONArray feedlist = json.getJSONArray("feedlist");
+            if(json.has("attemptslist") && json.get("attemptslist") instanceof JSONArray) {
+                JSONArray feedlist = json.getJSONArray("attemptslist");
                 for (int i = 0; i < feedlist.length(); i++) {
 //                    Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no for");
                     JSONObject row = feedlist.getJSONObject(i);
+
                     int pubId = row.getInt("pubId");
-                    String photo = row.getString("photo");
-                    String userPhoto = row.getString("userPhoto");
-                    String dateOfCreation = row.getString("dateOfCreation");
+                    double accuracy = row.getDouble("accuracy");
                     String username = row.getString("username");
+                    String photo = row.getString("photo");
+                    String userphoto = row.getString("userphoto");
+                    String attemptDate = row.getString("attemptDate");
 
 
                     int insertIndex = myAttemptsList.size();
-                    myAttemptsList.add(insertIndex, new MyAttemptItem(pubId, photo, userPhoto, dateOfCreation, username));
+                    myAttemptsList.add(insertIndex, new MyAttemptItem(pubId, accuracy, username,photo, userphoto, attemptDate));
                     Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + myAttemptsList.size());
 //                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
                     myAttemptsAdapter.notifyItemInserted(insertIndex);

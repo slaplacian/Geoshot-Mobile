@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.ui.myAttempts.utils.MyAttemptItem;
-import com.example.geoshot.utils.imageUtils.ImageUtils;
+import com.example.geoshot.generalUtilities.imageUtils.ImageUtils;
 
 import java.util.ArrayList;
 
@@ -39,8 +39,8 @@ public class MyAttemptsAdapter extends RecyclerView.Adapter<MyAttemptsAdapter.Vi
     public void onBindViewHolder(@NonNull MyAttemptsAdapter.ViewHolder holder, int position) {
         MyAttemptItem item = (MyAttemptItem) myAttemptItems.get(position);
 
-        ImageUtils.setImageToImageView(holder, item.getPhoto(), holder.challengeImage);
-        ImageUtils.setImageToImageView(holder, item.getUserphoto(), holder.userPhoto);
+        ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImage);
+        ImageUtils.setImageToImageView(holder.itemView, item.getUserphoto(), holder.userPhoto);
         holder.frameUsername.setText(item.getUsername());
         holder.accuracy.setText(String.valueOf(item.getAccuracy()));
         holder.pubId.setText(String.valueOf(item.getPubId()));

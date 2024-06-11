@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.ui.home.utils.FeedItem;
-import com.example.geoshot.utils.APIClient;
+import com.example.geoshot.generalUtilities.APIClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;

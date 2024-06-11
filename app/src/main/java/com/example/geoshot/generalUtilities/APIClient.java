@@ -1,8 +1,8 @@
-package com.example.geoshot.utils;
+package com.example.geoshot.generalUtilities;
 
 import android.util.Log;
 
-import com.example.geoshot.utils.post.PostStrategy;
+import com.example.geoshot.generalUtilities.post.PostStrategy;
 
 import okhttp3.*;
 import java.io.IOException;

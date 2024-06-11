@@ -1,4 +1,4 @@
-package com.example.geoshot.utils.post;
+package com.example.geoshot.generalUtilities.post;
 
 public interface PostStrategy {
     public String json();
