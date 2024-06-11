@@ -23,15 +23,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MyAttempts extends Fragment {
+public class MyAttemptsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private MyAttemptsAdapter myAttemptsAdapter;
     private final ArrayList<MyAttemptItem> myAttemptsList = new ArrayList<>();
 
-    public static MyAttempts newInstance() {
-        return new MyAttempts();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -42,13 +39,18 @@ public class MyAttempts extends Fragment {
     public void onCreatedView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.myAttemptsRecyclerView);
         // Set layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
         myAttemptsAdapter = new MyAttemptsAdapter(getContext(), myAttemptsList);
         recyclerView.setAdapter(myAttemptsAdapter);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
 
         APIClient api = new APIClient();
         String response = api.getRequest("xida");
@@ -59,6 +61,7 @@ public class MyAttempts extends Fragment {
     private void parseJson(String jsonText) {
 //        Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no parseJson");
         try {
+            myAttemptsList.clear();
             JSONObject json = new JSONObject(jsonText);
 //            Log.d("Depurando", "HomeFragment -> parseJson -> Consegui transformar jsonText em json");
             if(json.has("attemptslist") && json.get("attemptslist") instanceof JSONArray) {

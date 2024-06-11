@@ -22,7 +22,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
