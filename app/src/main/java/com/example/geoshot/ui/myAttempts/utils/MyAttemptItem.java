@@ -36,5 +36,5 @@ public class MyAttemptItem {
 
     public String getAttemptDate() {
         return attemptDate;
-    }
+    }  //ainda não usado
 }
