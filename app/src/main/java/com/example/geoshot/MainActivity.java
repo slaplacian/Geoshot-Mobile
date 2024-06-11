@@ -7,17 +7,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.example.geoshot.generalUtilities.APIClient;
 import com.example.geoshot.generalUtilities.post.PostLogin;
 import com.example.geoshot.generalUtilities.User;
-
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -56,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         APIClient api = new APIClient();
         api.setPostStrategy(new PostLogin(user));
         String response = api.postRequest();
+
         Log.d("Depurando", "Resposta da API: " + response);
 
         JSONObject json;
@@ -66,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             json = new JSONObject(response);
             status = json.getString("status");
             userOnSuccess = json.getString("username");
+            SessionManager.saveSession(this,userOnSuccess);
             if(status.equals("error")){
                 message = json.getString("message");
             }
