@@ -1,19 +1,21 @@
-package com.example.geoshot.ui.home;
+package com.example.geoshot.ui.myAttempts;
 
 import android.os.Bundle;
-import android.os.StrictMode;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.geoshot.R;
 import com.example.geoshot.ui.home.utils.FeedItem;
+import com.example.geoshot.ui.myAttempts.utils.MyAttemptItem;
 import com.example.geoshot.utils.APIClient;
 
 import org.json.JSONArray;
@@ -22,53 +24,37 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+public class MyAttempts extends Fragment {
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
-    private HomeAdapter homeAdapter;
-    private final ArrayList<FeedItem> feedList = new ArrayList<>();
+    private MyAttemptsAdapter myAttemptsAdapter;
+    private final ArrayList<MyAttemptItem> myAttemptsList = new ArrayList<>();
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_home, container, false);
+    public static MyAttempts newInstance() {
+        return new MyAttempts();
     }
 
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_my_attempts, container, false);
+    }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState){
+    public void onCreatedView(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         // Set layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        // Sending reference and data to Adapter
-        homeAdapter = new HomeAdapter(getContext(), feedList);
-        recyclerView.setAdapter(homeAdapter);
-
-        String loggedUser = "vazio";
-        if (getArguments() == null) {
-            Log.d("Depurando", "HomeFragment -> onViewCreated -> getArguments returned null ## ");
-        } else {
-            loggedUser = getArguments().getString("username");
-        }
-        Log.d("Depurando", "LoggedUser -> " + loggedUser);
+        myAttemptsAdapter = new MyAttemptsAdapter(getContext(), myAttemptsList);
+        recyclerView.setAdapter(myAttemptsAdapter);
 
         APIClient api = new APIClient();
         String response = api.getRequest("xida");
 
         parseJson(response);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     private void parseJson(String jsonText) {
@@ -88,11 +74,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     String username = row.getString("username");
 
 
-                    int insertIndex = feedList.size();
-                    feedList.add(insertIndex, new FeedItem(pubId, photo, userPhoto, dateOfCreation, username));
-                    Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + feedList.size());
+                    int insertIndex = myAttemptsList.size();
+                    myAttemptsList.add(insertIndex, new MyAttemptItem(pubId, photo, userPhoto, dateOfCreation, username));
+                    Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + myAttemptsList.size());
 //                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
-                    homeAdapter.notifyItemInserted(insertIndex);
+                    myAttemptsAdapter.notifyItemInserted(insertIndex);
                 }
             } else {
                 Log.d("Depurando", "HomeFragment -> parseJson -> 'feedlist' não é um array ou não existe");
