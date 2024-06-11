@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.geoshot.utils.APIClient;
-import com.example.geoshot.utils.PostCadastro;
+import com.example.geoshot.utils.post.PostCadastro;
 import com.example.geoshot.utils.User;
 
 import org.json.JSONException;

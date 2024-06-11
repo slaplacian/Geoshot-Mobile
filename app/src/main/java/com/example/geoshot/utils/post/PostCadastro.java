@@ -1,7 +1,8 @@
-package com.example.geoshot.utils;
+package com.example.geoshot.utils.post;
 
 
-import com.example.geoshot.R;
+import com.example.geoshot.utils.AuxiliarGeral;
+import com.example.geoshot.utils.User;
 
 public class PostCadastro implements PostStrategy {
     private static final String URL_CADASTRO = "http://"+ AuxiliarGeral.getIPServerAddress() +":8080/api/signup";

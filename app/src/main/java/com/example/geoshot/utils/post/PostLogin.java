@@ -1,8 +1,9 @@
-package com.example.geoshot.utils;
+package com.example.geoshot.utils.post;
 
 import android.util.Log;
 
-import com.example.geoshot.R;
+import com.example.geoshot.utils.AuxiliarGeral;
+import com.example.geoshot.utils.User;
 
 public class PostLogin implements PostStrategy {
     private static final String URL_LOGIN = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/login";

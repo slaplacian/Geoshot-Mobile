@@ -2,7 +2,7 @@ package com.example.geoshot.utils;
 
 import android.util.Log;
 
-import com.example.geoshot.R;
+import com.example.geoshot.utils.post.PostStrategy;
 
 import okhttp3.*;
 import java.io.IOException;

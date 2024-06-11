@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.geoshot.utils.APIClient;
-import com.example.geoshot.utils.PostLogin;
+import com.example.geoshot.utils.post.PostLogin;
 import com.example.geoshot.utils.User;
 
 import org.json.JSONException;
