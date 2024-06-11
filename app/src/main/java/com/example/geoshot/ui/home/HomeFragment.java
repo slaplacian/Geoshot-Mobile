@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.geoshot.R;
 import com.example.geoshot.ui.home.utils.FeedItem;
 import com.example.geoshot.utils.APIClient;
+import com.example.geoshot.utils.sqlite.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,16 +57,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         adapter = new Adapter(getContext(), feedList);
         recyclerView.setAdapter(adapter);
 
-        String loggedUser = "vazio";
-        if (getArguments() == null) {
+        //String loggedUser = "vazio";
+
+        String loggedUser = SessionManager.getSession(this.getContext());
+
+        if (loggedUser.equals("DEU RUIM")) {
             Log.d("Depurando", "HomeFragment -> onViewCreated -> getArguments returned null ## ");
-        } else {
-            loggedUser = getArguments().getString("username");
         }
+
+//        else {
+//            loggedUser = getArguments().getString("username");
+//        }
         Log.d("Depurando", "LoggedUser -> " + loggedUser);
 
         APIClient api = new APIClient();
-        String response = api.getRequest("xida");
+        String response = api.getRequest(loggedUser);
 
         parseJson(response);
     }
