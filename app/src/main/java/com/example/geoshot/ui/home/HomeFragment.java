@@ -65,9 +65,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Log.d("Depurando", "HomeFragment -> onViewCreated -> getArguments returned null ## ");
         }
 
-//        else {
-//            loggedUser = getArguments().getString("username");
-//        }
         Log.d("Depurando", "LoggedUser -> " + loggedUser);
 
         APIClient api = new APIClient();
@@ -85,6 +82,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void parseJson(String jsonText) {
 //        Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no parseJson");
         try {
+            feedList.clear();
             JSONObject json = new JSONObject(jsonText);
 //            Log.d("Depurando", "HomeFragment -> parseJson -> Consegui transformar jsonText em json");
             if(json.has("feedlist") && json.get("feedlist") instanceof JSONArray) {
