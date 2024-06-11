@@ -18,6 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.geoshot.utils.APIClient;
 import com.example.geoshot.utils.PostLogin;
 import com.example.geoshot.utils.User;
+import com.example.geoshot.utils.sqlite.SessionManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(this, BaseActivity.class);
-            intent.putExtra("username", userOnSuccess);
+            SessionManager.saveSession(this,userOnSuccess);
+            //intent.putExtra("username", userOnSuccess);
             startActivity(intent);
         }
     }
