@@ -1,4 +1,4 @@
-package com.example.geoshot.generalUtilities.sqlite;
+package com.example.geoshot.utils.sqlite;
 
 import android.content.ContentValues;
 import android.content.Context;

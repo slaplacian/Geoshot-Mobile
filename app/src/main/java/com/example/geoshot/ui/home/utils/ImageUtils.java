@@ -1,12 +1,11 @@
-package com.example.geoshot.generalUtilities.imageUtils;
+package com.example.geoshot.ui.home.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.view.View;
 import android.widget.ImageView;
 
-import com.example.geoshot.ui.home.HomeAdapter;
+import com.example.geoshot.ui.home.Adapter;
 
 import coil.Coil;
 import coil.ImageLoader;
@@ -19,13 +18,13 @@ public class ImageUtils {
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
-    public static void setImageToImageView(View itemView, String base64EncodedString,
-                                           ImageView holderImageView) {
+    public static void setImageToImageView(Adapter.ViewHolder holder, String base64EncodedString,
+                                           ImageView holderIimageView) {
         Bitmap decodedBitmap = ImageUtils.decodeBase64ToBitmap(base64EncodedString);
-        ImageLoader imageLoader = Coil.imageLoader(itemView.getContext());
-        ImageRequest request = new ImageRequest.Builder(itemView.getContext())
+        ImageLoader imageLoader = Coil.imageLoader(holder.itemView.getContext());
+        ImageRequest request = new ImageRequest.Builder(holder.itemView.getContext())
                 .data(decodedBitmap)
-                .target(holderImageView)
+                .target(holderIimageView)
                 .build();
         imageLoader.enqueue(request);
     }

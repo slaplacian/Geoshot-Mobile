@@ -14,9 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.ui.home.utils.FeedItem;
-import com.example.geoshot.generalUtilities.APIClient;
-import com.example.geoshot.generalUtilities.sqlite.SessionManager;
-
+import com.example.geoshot.utils.APIClient;
+import com.example.geoshot.utils.sqlite.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,10 +23,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
-    private HomeAdapter homeAdapter;
+    private Adapter adapter;
     private final ArrayList<FeedItem> feedList = new ArrayList<>();
+    private OkHttpClient client;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,8 +54,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
 
         // Sending reference and data to Adapter
-        homeAdapter = new HomeAdapter(getContext(), feedList);
-        recyclerView.setAdapter(homeAdapter);
+        adapter = new Adapter(getContext(), feedList);
+        recyclerView.setAdapter(adapter);
 
         //String loggedUser = "vazio";
 
@@ -96,7 +101,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     feedList.add(insertIndex, new FeedItem(pubId, photo, userPhoto, dateOfCreation, username));
                     Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + feedList.size());
 //                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
-                    homeAdapter.notifyItemInserted(insertIndex);
+                    adapter.notifyItemInserted(insertIndex);
                 }
             } else {
                 Log.d("Depurando", "HomeFragment -> parseJson -> 'feedlist' não é um array ou não existe");
