@@ -30,10 +30,10 @@ public class BaseActivity extends AppCompatActivity {
         String loggedUsername = getIntent().getStringExtra("username");
         Log.d("Depurando", "BaseActivity -> onCreate -> LoggedUser -> " + loggedUsername);
 
-        Bundle bundle = new Bundle();
-        bundle.putString("username", loggedUsername);
-        homeFragment.setArguments(bundle);
-        searchFragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putString("username", loggedUsername);
+//        homeFragment.setArguments(bundle);
+//        searchFragment.setArguments(bundle);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         loadFragment(homeFragment, true);

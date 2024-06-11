@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.geoshot.R;
 import com.example.geoshot.ui.home.utils.FeedItem;
 import com.example.geoshot.generalUtilities.APIClient;
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,16 +52,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         homeAdapter = new HomeAdapter(getContext(), feedList);
         recyclerView.setAdapter(homeAdapter);
 
-        String loggedUser = "vazio";
-        if (getArguments() == null) {
+        //String loggedUser = "vazio";
+
+        String loggedUser = SessionManager.getSession(this.getContext());
+
+        if (loggedUser.equals("DEU RUIM")) {
             Log.d("Depurando", "HomeFragment -> onViewCreated -> getArguments returned null ## ");
-        } else {
-            loggedUser = getArguments().getString("username");
         }
+
         Log.d("Depurando", "LoggedUser -> " + loggedUser);
 
         APIClient api = new APIClient();
-        String response = api.getRequest("xida");
+        String response = api.getRequest(loggedUser);
 
         parseJson(response);
     }
@@ -73,6 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void parseJson(String jsonText) {
 //        Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no parseJson");
         try {
+            feedList.clear();
             JSONObject json = new JSONObject(jsonText);
 //            Log.d("Depurando", "HomeFragment -> parseJson -> Consegui transformar jsonText em json");
             if(json.has("feedlist") && json.get("feedlist") instanceof JSONArray) {
