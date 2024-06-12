@@ -1,5 +1,7 @@
 package com.example.geoshot.ui.myChallenges;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
