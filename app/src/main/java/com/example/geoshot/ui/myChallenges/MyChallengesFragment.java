@@ -1,7 +1,5 @@
 package com.example.geoshot.ui.myChallenges;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.geoshot.R;
-import com.example.geoshot.generalUtilities.APIClient;
-import com.example.geoshot.ui.home.utils.FeedItem;
+import com.example.geoshot.generalUtilities.get.GetMyChalls;
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import com.example.geoshot.ui.myChallenges.utils.MyChallengesItem;
 
 import org.json.JSONArray;
@@ -54,8 +52,8 @@ public class MyChallengesFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        APIClient api = new APIClient();
-        String response = api.getRequest("xida");
+        String username = SessionManager.getSession(this.getContext());
+        String response = GetMyChalls.get(username);
 
         parseJson(response);
     }

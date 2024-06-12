@@ -14,8 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.geoshot.R;
+import com.example.geoshot.generalUtilities.get.GetMyAttempts;
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import com.example.geoshot.ui.myAttempts.utils.MyAttemptItem;
-import com.example.geoshot.generalUtilities.APIClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,8 +53,8 @@ public class MyAttemptsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        APIClient api = new APIClient();
-        String response = api.getRequest("xida");
+        String username = SessionManager.getSession(this.getContext());
+        String response = GetMyAttempts.get(username);
 
         parseJson(response);
     }

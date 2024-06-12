@@ -1,11 +1,12 @@
 package com.example.geoshot.generalUtilities.get;
 
-public class APIClientGet extends APIClient0 {
+import com.example.geoshot.generalUtilities.APIClient;
+
+public class APIClientGet extends APIClient {
 
     public APIClientGet(String endpoint) {
         super(endpoint);
     }
-
     public String PrepareStringRequest(String... params) {
         String req = "http://" + this.host + this.endpoint + "?";
         for(int i=0;i<params.length;i++) {
@@ -15,7 +16,6 @@ public class APIClientGet extends APIClient0 {
         }
 
         return req;
-
 
     }
 }

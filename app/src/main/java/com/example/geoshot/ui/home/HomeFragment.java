@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
+import com.example.geoshot.generalUtilities.get.GetInitialPage;
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import com.example.geoshot.ui.home.utils.FeedItem;
-import com.example.geoshot.generalUtilities.APIClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,8 +64,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
 
-        APIClient api = new APIClient();
-        String response = api.getRequest("home");
+        String username = SessionManager.getSession(this.getContext());
+        Log.d("Usuario Coletado:",username);
+        String response = GetInitialPage.get(username);
 
         parseJson(response);
     }

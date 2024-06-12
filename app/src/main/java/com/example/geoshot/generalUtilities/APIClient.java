@@ -1,66 +1,25 @@
 package com.example.geoshot.generalUtilities;
 
-import android.util.Log;
-
-import com.example.geoshot.generalUtilities.post.PostStrategy;
-
-import okhttp3.*;
-import java.io.IOException;
-
 public class APIClient {
-    private static PostStrategy strategy;
-    private static final OkHttpClient client = new OkHttpClient();
+    protected String host = "172.15.2.239:8080";
+    protected String endpoint;
 
-    public void setPostStrategy(PostStrategy strategy) {
-        APIClient.strategy = strategy;
+    public APIClient(String endpoint) {
+        this.endpoint = endpoint;
     }
 
-    public String postRequest() {
-        MediaType JSON = MediaType.get("application/json; charset=utf-8");
-        String json = strategy.json();
-        RequestBody body = RequestBody.create(json, JSON);
-
-        Request request = new Request.Builder()
-                .url(strategy.url())
-                .post(body)
-                .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                assert response.body() != null;
-                String resposta = response.body().string();
-                return resposta;
-            } else {
-                Log.d("Depurando", "APIClientError -> postRequest -> responseisNotSuccessful: " + response.code());
-
-                throw new IOException("Erro: " + response.code());
-            }
-        }
-        catch (IOException e ) {
-            Log.d("Depurando", "APIClientError -> postRequest -> IOException");
-            throw new RuntimeException(e);
-        }
+    public String PrepareStringRequest() {
+        String req = "http://" + this.host + this.endpoint;
+        return req;
     }
 
-    public String getRequest(String praonde) {
-        String url = "";
-        if (praonde.equals("home")){
-            url = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/initial-page?username=xida";
+    public String PrepareStringBody(String... keys) {
+        String body = "{\n";
+        for(int i=0;i< keys.length;i++) {
+            body += "\""+keys[i]+"\":\"%s\"";
+            if(i != keys.length - 1) body += ",";
         }
-        else if (praonde.equals("search")){
-            url = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/search?username=xida&searched-username=ito";
-        }
-
-        Request request = new Request.Builder().url(url).build();
-
-        try {
-            Response response = client.newCall(request).execute();
-            String resposta = response.body().string();
-            Log.d("Depurando", "APIClient -> getRequest -> Olha o response: " + resposta);
-            return resposta;
-        } catch (Exception e ) {
-            Log.d("Depurando", "APIClient -> getRequest  -> Erro no response " + e.toString());
-            return e.toString();
-        }
+        body += "}";
+        return body;
     }
 }

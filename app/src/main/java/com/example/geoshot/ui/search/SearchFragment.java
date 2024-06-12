@@ -15,10 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.databinding.FragmentSearchBinding;
-import com.example.geoshot.generalUtilities.APIClient;
 import com.example.geoshot.generalUtilities.sqlite.SessionManager;
-import com.example.geoshot.ui.home.utils.FeedItem;
 import com.example.geoshot.ui.search.utils.SearchedUser;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;

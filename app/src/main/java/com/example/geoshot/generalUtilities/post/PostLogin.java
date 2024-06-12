@@ -1,26 +1,12 @@
 package com.example.geoshot.generalUtilities.post;
 
-import android.util.Log;
+import com.example.geoshot.generalUtilities.APIClient;
 
-import com.example.geoshot.generalUtilities.AuxiliarGeral;
-import com.example.geoshot.generalUtilities.User;
-
-public class PostLogin implements PostStrategy {
-    private static final String URL_LOGIN = "http://"+ AuxiliarGeral.getIPServerAddress() + ":8080/api/login";
-    private final User user;
-
-    public PostLogin(User user){
-        this.user = user;
-    }
-    @Override
-    public String json() {
-        return "{\"username\": \"" + user.getUsername() + "\"," +
-                "\"password\": \"" + user.getSenha() + "\"}";
-    }
-
-    @Override
-    public String url() {
-        Log.d("Depurando", "URL chamada em postLogin: " + URL_LOGIN);
-        return URL_LOGIN;
+public class PostLogin {
+    public static String post(String username, String password) {
+        APIClient bul = new APIClient("/api/login");
+        String url  = bul.PrepareStringRequest();
+        String body = String.format(bul.PrepareStringBody("username","password"),username,password);
+        return PostRequest.post(url,body);
     }
 }
