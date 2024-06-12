@@ -53,6 +53,9 @@ public class SearchFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        
+
     }
 
     private void parseJson(String jsonText) {

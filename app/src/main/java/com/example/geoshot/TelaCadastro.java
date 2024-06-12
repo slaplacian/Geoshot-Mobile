@@ -39,7 +39,7 @@ public class TelaCadastro extends AppCompatActivity {
         });
 
         nomeCompleto = findViewById(R.id.nomeCompleto);
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.usernameProfile);
         email = findViewById(R.id.email);
         senha = findViewById(R.id.senha);
         confirmarSenha = findViewById(R.id.confirmarSenha);
