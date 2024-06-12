@@ -1,10 +1,10 @@
-package com.example.geoshot.generalUtilities.get;
+package com.example.geoshot.generalUtilities;
 
-public class APIClient0 {
+public class APIClient {
     protected String host = "172.15.2.239:8080";
     protected String endpoint;
 
-    protected APIClient0(String endpoint) {
+    public APIClient(String endpoint) {
         this.endpoint = endpoint;
     }
 
