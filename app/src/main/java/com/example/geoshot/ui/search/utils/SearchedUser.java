@@ -26,4 +26,8 @@ public class SearchedUser {
             return "Follow";
         }
     }
+
+    public void setFollowshipState(String followshipState) {
+        this.followshipState = followshipState;
+    }
 }
