@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onStart();
 
         APIClient api = new APIClient();
-        String response = api.getRequest("xida");
+        String response = api.getRequest("home");
 
         parseJson(response);
     }
