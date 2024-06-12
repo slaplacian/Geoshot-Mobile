@@ -44,9 +44,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
         FeedItem item = (FeedItem) feedItems.get(position);
 
-        ImageUtilsPika piker = new ImageUtilsPika();
-//        piker.setImageToView(context,holder.challengeImage,item.getPhoto());
-//        piker.setImageToViewProfile(context,holder.userPhoto,item.getUserPhoto());
+        ImageUtilsPika.setImageToViewProfile(context,holder.userPhoto,item.getUserPhoto());
         ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImage);
         ImageUtils.setImageToImageView(holder.itemView, item.getUserPhoto(), holder.userPhoto);
         holder.frameUsername.setText(item.getUsername());
