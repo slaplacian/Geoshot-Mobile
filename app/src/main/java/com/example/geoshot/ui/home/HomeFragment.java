@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private RecyclerView recyclerView;
     private HomeAdapter homeAdapter;
     private final ArrayList<FeedItem> feedList = new ArrayList<>();
+    private TextView welcomeText;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,6 +46,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
+        welcomeText = (TextView) view.findViewById(R.id.welcomeUserTextHome);
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         // Set layout
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -57,14 +61,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             navController.navigate(R.id.action_home_fragment_to_solveChallenge_fragment, bundle);
         });
         recyclerView.setAdapter(homeAdapter);
-
-        String loggedUser = "vazio";
-        if (getArguments() == null) {
-            Log.d("Depurando", "HomeFragment -> onViewCreated -> getArguments returned null ## ");
-        } else {
-            loggedUser = getArguments().getString("username");
-        }
-        Log.d("Depurando", "LoggedUser -> " + loggedUser);
     }
 
     @Override
@@ -72,6 +68,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         super.onStart();
 
         String username = SessionManager.getSession(this.getContext());
+        String welcometxt = "Bem vindo a sua página inicial, " + username + "!";
+        welcomeText.setText(welcometxt);
         Log.d("Usuario Coletado:",username);
         String response = GetInitialPage.get(username);
 

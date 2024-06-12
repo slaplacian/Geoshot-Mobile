@@ -45,10 +45,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         FeedItem item = (FeedItem) feedItems.get(position);
 
         ImageUtilsPika piker = new ImageUtilsPika();
-        piker.setImageToView(context,holder.challengeImage,item.getPhoto());
-        piker.setImageToViewProfile(context,holder.userPhoto,item.getUserPhoto());
-        //ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImage);
-        //ImageUtils.setImageToImageView(holder.itemView, item.getUserPhoto(), holder.userPhoto);
+//        piker.setImageToView(context,holder.challengeImage,item.getPhoto());
+//        piker.setImageToViewProfile(context,holder.userPhoto,item.getUserPhoto());
+        ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImage);
+        ImageUtils.setImageToImageView(holder.itemView, item.getUserPhoto(), holder.userPhoto);
         holder.frameUsername.setText(item.getUsername());
         holder.criadoEm.setText(item.getDateOfCreation());
         holder.pubId.setText(String.valueOf(item.getPubId()));
