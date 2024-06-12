@@ -11,7 +11,6 @@
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
-
     <fragment
         android:id="@+id/search"
         android:name="com.example.geoshot.ui.search.SearchFragment"
@@ -19,7 +18,7 @@
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/createcChallenge"
+        android:id="@+id/createChallenge"
         android:name="com.example.geoshot.ui.createChallenge.CreateChallengeFragment"
         android:label="@string/create_challenge"
         tools:layout="@layout/fragment_cretate_challenge" />
@@ -28,7 +27,11 @@
         android:id="@+id/perfil"
         android:name="com.example.geoshot.ui.perfil.PerfilFragment"
         android:label="perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil">
+        <action
+            android:id="@+id/action_perfil_to_editProfile"
+            app:destination="@id/editProfile" />
+    </fragment>
 
     <fragment
         android:id="@+id/myChallenges"

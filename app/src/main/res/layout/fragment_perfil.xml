@@ -9,7 +9,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.perfil.PerfilFragment">
 
-    <!-- Foto de perfil circular -->
     <ImageView
         android:id="@+id/profile_image"
         android:layout_width="155dp"
@@ -18,7 +17,6 @@
         android:background="@drawable/circle_background"
         android:scaleType="centerCrop" />
 
-    <!-- Username do usuário -->
     <TextView
         android:id="@+id/username"
         android:layout_width="wrap_content"
@@ -29,7 +27,6 @@
         android:textStyle="bold"
         android:textColor="@android:color/black" />
 
-    <!-- Círculo com a pontuação do usuário -->
     <TextView
         android:id="@+id/user_score"
         android:layout_width="58dp"
@@ -41,7 +38,6 @@
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
-    <!-- Botão "Meus desafios" -->
     <Button
         android:id="@+id/my_challenges_button"
         android:layout_width="match_parent"
@@ -50,7 +46,6 @@
         android:text="Meus desafios"
         android:textSize="18sp" />
 
-    <!-- Botão "Resolvidos por mim" -->
     <Button
         android:id="@+id/solved_by_me_button"
         android:layout_width="match_parent"
@@ -59,7 +54,6 @@
         android:text="Resolvidos por mim"
         android:textSize="18sp" />
 
-    <!-- Botão "Editar perfil" -->
     <Button
         android:id="@+id/edit_profile_button"
         android:layout_width="match_parent"
@@ -68,7 +62,6 @@
         android:text="Editar perfil"
         android:textSize="18sp" />
 
-    <!-- Botão "Sair" -->
     <Button
         android:id="@+id/logout_button"
         android:layout_width="match_parent"
