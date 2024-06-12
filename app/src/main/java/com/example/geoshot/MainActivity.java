@@ -51,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
         String pass = senha.getText().toString();
         User user = new User(username, pass);
 
-//        APIClient api = new APIClient();
-//        api.setPostStrategy(new PostLogin(user));
-//        String response = api.postRequest();
+        this.username.setText("");
+        senha.setText("");
 
         String response = PostLogin.post(username,pass);
 
@@ -67,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             json = new JSONObject(response);
             status = json.getString("status");
             userOnSuccess = json.getString("username");
+            SessionManager.removeSession(this);
             SessionManager.saveSession(this,userOnSuccess);
             if(status.equals("error")){
                 message = json.getString("message");
@@ -77,8 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (status.equals("error")){
             errorMessage.setText(R.string.invalid_login);
-            this.username.setText("");
-            senha.setText("");
+
         }
         else {
             Intent intent = new Intent(this, BaseActivity.class);

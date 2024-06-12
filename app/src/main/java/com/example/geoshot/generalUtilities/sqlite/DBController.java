@@ -13,30 +13,22 @@ public class DBController {
         banco = new DBHelper(context);
     }
     public String insert(String username){
-
         ContentValues valores ;
-
         long resultado;
-
         db = banco.getWritableDatabase();
-
         valores = new ContentValues();
-
         valores.put(DBHelper.username, username);
-
         resultado = db.insert(DBHelper.table, null, valores);
-
         db.close();
-
         if (resultado == -1)
             return "Erro ao inserir registro" ;
         else
             return "Registro Inserido com sucesso" ;
-
     }
 
     public void delete() {
-        banco.onUpgrade(db,1,1);
+        SQLiteDatabase db0 = banco.getWritableDatabase();
+        banco.onUpgrade(db0,1,1);
     }
 
     public String getUsername(){

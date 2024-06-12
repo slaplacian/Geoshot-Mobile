@@ -49,5 +49,6 @@ dependencies {
     implementation ("org.json:json:20210307")
     implementation("io.coil-kt:coil:2.6.0")
     implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
 }
