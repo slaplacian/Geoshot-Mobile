@@ -73,9 +73,7 @@ public class PerfilFragment extends Fragment {
         Button logoutButton = view.findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                requireActivity().finish();
-            }
+            public void onClick(View v) { requireActivity().finish(); }
         });
     }
 
