@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.geoshot.R;
@@ -55,10 +56,14 @@ public class SolveChallengeFragment extends Fragment implements OnMapReadyCallba
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(SolveChallengeViewModel.class);
-        // TODO: Use the ViewModel
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        TextView textView = view.findViewById(R.id.pubIdSolveChallenge);
+        if (getArguments() != null) {
+            String selectedItem = getArguments().getString("pubId");
+            textView.setText(selectedItem);
+        }
     }
 
     @Override
