@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/searchEditText"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="600dp"
         android:ems="10"
         android:hint="Usuário a pesquisar"

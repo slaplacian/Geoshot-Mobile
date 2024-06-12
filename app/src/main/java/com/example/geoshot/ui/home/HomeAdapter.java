@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,9 +22,11 @@ import java.util.ArrayList;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     Context context;
     ArrayList<FeedItem> feedItems;
-    public HomeAdapter(Context context, ArrayList<FeedItem> feedItems) {
+    private final OnItemClickListener onItemClickListener;
+    public HomeAdapter(Context context, ArrayList<FeedItem> feedItems, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.feedItems = feedItems;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -48,6 +52,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         holder.frameUsername.setText(item.getUsername());
         holder.criadoEm.setText(item.getDateOfCreation());
         holder.pubId.setText(String.valueOf(item.getPubId()));
+        holder.shotBtn.setOnClickListener(v -> onItemClickListener.onItemClick(String.valueOf(item.getPubId())));
     }
     @Override
     public int getItemCount() {
@@ -57,6 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView userPhoto, challengeImage;
         TextView frameUsername, criadoEm, pubId;
+        Button shotBtn;
         public ViewHolder(View view) {
             super(view);
             userPhoto = (ImageView) view.findViewById(R.id.userPhoto);
@@ -64,6 +70,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             frameUsername = (TextView) view.findViewById(R.id.frameUsername);
             criadoEm = (TextView) view.findViewById(R.id.criadoEm);
             pubId = (TextView) view.findViewById(R.id.pubId);
+            shotBtn = (Button) view.findViewById(R.id.btnShot);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(String pubId);
     }
 }

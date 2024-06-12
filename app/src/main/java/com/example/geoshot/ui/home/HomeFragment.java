@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +50,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerView.setLayoutManager(layoutManager);
 
         // Sending reference and data to Adapter
-        homeAdapter = new HomeAdapter(getContext(), feedList);
+        homeAdapter = new HomeAdapter(getContext(), feedList, pubId -> {
+            NavController navController = Navigation.findNavController(view);
+            Bundle bundle = new Bundle();
+            bundle.putString("pubId", pubId);
+            navController.navigate(R.id.action_home_fragment_to_solveChallenge_fragment, bundle);
+        });
         recyclerView.setAdapter(homeAdapter);
 
         String loggedUser = "vazio";
