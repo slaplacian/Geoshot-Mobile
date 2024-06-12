@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
+import com.example.geoshot.generalUtilities.imageUtils.ImageUtilsPika;
 import com.example.geoshot.ui.home.utils.FeedItem;
 import com.example.geoshot.generalUtilities.imageUtils.ImageUtils;
 
@@ -39,8 +40,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull HomeAdapter.ViewHolder holder, int position) {
         FeedItem item = (FeedItem) feedItems.get(position);
 
-        ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImage);
-        ImageUtils.setImageToImageView(holder.itemView, item.getUserPhoto(), holder.userPhoto);
+        ImageUtilsPika piker = new ImageUtilsPika();
+        piker.setImageToView(context,holder.challengeImage,item.getPhoto());
+        piker.setImageToViewProfile(context,holder.userPhoto,item.getUserPhoto());
+        //ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImage);
+        //ImageUtils.setImageToImageView(holder.itemView, item.getUserPhoto(), holder.userPhoto);
         holder.frameUsername.setText(item.getUsername());
         holder.criadoEm.setText(item.getDateOfCreation());
         holder.pubId.setText(String.valueOf(item.getPubId()));

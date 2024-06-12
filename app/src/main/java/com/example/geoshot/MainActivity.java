@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        username = findViewById(R.id.username);
+        username = findViewById(R.id.usernameProfile);
         senha = findViewById(R.id.senha);
         errorMessage = findViewById(R.id.errorMessage);
 
