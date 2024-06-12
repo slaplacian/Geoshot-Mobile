@@ -3,56 +3,56 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/home">
+    app:startDestination="@+id/home_fragment">
 
     <fragment
-        android:id="@+id/home"
+        android:id="@+id/home_fragment"
         android:name="com.example.geoshot.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/search"
+        android:id="@+id/search_fragment"
         android:name="com.example.geoshot.ui.search.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/createChallenge"
+        android:id="@+id/createChallenge_fragment"
         android:name="com.example.geoshot.ui.createChallenge.CreateChallengeFragment"
         android:label="@string/create_challenge"
         tools:layout="@layout/fragment_cretate_challenge" />
 
     <fragment
-        android:id="@+id/perfil"
+        android:id="@+id/perfil_fragment"
         android:name="com.example.geoshot.ui.perfil.PerfilFragment"
         android:label="perfil"
         tools:layout="@layout/fragment_perfil">
         <action
             android:id="@+id/action_perfil_to_editProfile"
-            app:destination="@id/editProfile" />
+            app:destination="@id/editProfile_fragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/myChallenges"
+        android:id="@+id/myChallenges_fragment"
         android:name="com.example.geoshot.ui.myChallenges.MyChallengesFragment"
         android:label="My Challenges"
         tools:layout="@layout/fragment_my_challenges" />
 
     <fragment
-        android:id="@+id/solvedByMe"
+        android:id="@+id/solvedByMe_fragment"
         android:name="com.example.geoshot.ui.myAttempts.MyAttemptsFragment"
         android:label="My Challenges"
         tools:layout="@layout/fragment_my_attempts" />
 
     <fragment
-        android:id="@+id/editProfile"
+        android:id="@+id/editProfile_fragment"
         android:name="com.example.geoshot.ui.editProfile.EditProfileFragment"
         android:label="Edit profile"
         tools:layout="@layout/fragment_edit_profile"/>
 
     <fragment
-        android:id="@+id/solveChallenge"
+        android:id="@+id/solveChallenge_fragment"
         android:name="com.example.geoshot.ui.solveChallenge.SolveChallengeFragment"
         android:label="Solve Challenge"
         tools:layout="@layout/fragment_solve_challenge"/>
