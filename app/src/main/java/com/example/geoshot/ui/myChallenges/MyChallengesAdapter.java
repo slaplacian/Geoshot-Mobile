@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,9 +20,12 @@ import java.util.ArrayList;
 public class MyChallengesAdapter extends RecyclerView.Adapter<MyChallengesAdapter.ViewHolder>{
     Context context;
     ArrayList<MyChallengesItem> myChallengesList;
-    public MyChallengesAdapter(Context context, ArrayList<MyChallengesItem> myChallengesList) {
+    OnDeleteClickListener onDeleteClickListener;
+
+    public MyChallengesAdapter(Context context, ArrayList<MyChallengesItem> myChallengesList, OnDeleteClickListener onDeleteClickListener) {
         this.context = context;
         this.myChallengesList = myChallengesList;
+        this.onDeleteClickListener = onDeleteClickListener;
     }
 
     @NonNull
@@ -42,6 +46,11 @@ public class MyChallengesAdapter extends RecyclerView.Adapter<MyChallengesAdapte
         ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.myChallengesImage);
         holder.correctValue.setText(String.valueOf(item.getCorrectValue()));
         holder.pubId.setText(String.valueOf(item.getPubId()));
+        holder.btnExcluir.setOnClickListener(v -> {
+            onDeleteClickListener.onButtonClick(String.valueOf(item.getPubId()));
+            holder.btnExcluir.setText("DELETADO");
+            holder.btnExcluir.setEnabled(false);
+        });
     }
 
     public int getItemCount() {
@@ -51,12 +60,18 @@ public class MyChallengesAdapter extends RecyclerView.Adapter<MyChallengesAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView myChallengesImage;
         TextView correctValue, pubId;
+        Button btnExcluir;
         public ViewHolder(View view) {
             super(view);
 
             myChallengesImage = (ImageView) view.findViewById(R.id.myChallengesImage);
             correctValue = (TextView) view.findViewById(R.id.correctValue);
             pubId = (TextView) view.findViewById(R.id.pubId);
+            btnExcluir = (Button) view.findViewById(R.id.btnExcluir);
         }
+    }
+
+    public interface OnDeleteClickListener {
+        void onButtonClick(String getPubId);
     }
 }

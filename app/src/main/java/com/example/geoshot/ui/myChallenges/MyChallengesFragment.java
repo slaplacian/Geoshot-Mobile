@@ -16,7 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.geoshot.R;
+import com.example.geoshot.generalUtilities.delete.DeleteMyChalls;
 import com.example.geoshot.generalUtilities.get.GetMyChalls;
+import com.example.geoshot.generalUtilities.put.PutToggleFollowship;
 import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import com.example.geoshot.ui.myChallenges.utils.MyChallengesItem;
 
@@ -31,6 +33,7 @@ public class MyChallengesFragment extends Fragment {
     private RecyclerView recyclerView;
     private MyChallengesAdapter myChallengesAdapter;
     private final ArrayList<MyChallengesItem> myChallengesList = new ArrayList<>();
+    String username;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -47,14 +50,14 @@ public class MyChallengesFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        myChallengesAdapter = new MyChallengesAdapter(getContext(), myChallengesList);
+        myChallengesAdapter = new MyChallengesAdapter(getContext(), myChallengesList, this::deletePublication);
         recyclerView.setAdapter(myChallengesAdapter);
     }
 
     public void onStart() {
         super.onStart();
 
-        String username = SessionManager.getSession(this.getContext());
+        username = SessionManager.getSession(this.getContext());
         String response = GetMyChalls.get(username);
 
         parseJson(response);
@@ -91,6 +94,20 @@ public class MyChallengesFragment extends Fragment {
         } catch (JSONException e ) {
             Log.e("Depurando", "HomeFragment -> parseJson -> JSONException: " + e.getMessage());
             throw new RuntimeException(e);
+        }
+    }
+
+    private void deletePublication(String pubId){
+        String response = DeleteMyChalls.delete(this.username, pubId);
+        deletePublicationInList(pubId);
+    }
+
+    private void deletePublicationInList(String pubId){
+        for(int i = 0; i < myChallengesList.size(); i++){
+            if(myChallengesList.get(i).getPubId() == Integer.parseInt(pubId)){
+                myChallengesList.remove(i);
+                myChallengesAdapter.notifyItemRemoved(i);
+            }
         }
     }
 }
