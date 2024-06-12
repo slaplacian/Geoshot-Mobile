@@ -14,20 +14,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.example.geoshot.BaseActivity;
 import com.example.geoshot.R;
-import com.example.geoshot.generalUtilities.User;
 import com.example.geoshot.generalUtilities.get.GetPerfil;
 import com.example.geoshot.generalUtilities.imageUtils.ImageUtilsPika;
 import com.example.geoshot.generalUtilities.sqlite.SessionManager;
-import com.example.geoshot.ui.search.SearchAdapter;
-import com.example.geoshot.ui.search.utils.SearchedUser;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class PerfilFragment extends Fragment {
 
@@ -98,9 +90,7 @@ public class PerfilFragment extends Fragment {
 
         usernameProfile.setText(username);
         accuracyProfile.setText(String.format("%.1f",accuracy)+"%");
-
-        ImageUtilsPika piker = new ImageUtilsPika();
-        piker.setImageToViewProfile(this.getContext(),userPhoto,encodedString);
+        ImageUtilsPika.setImageToViewProfile(this.getContext(),userPhoto,encodedString);
 
     }
 

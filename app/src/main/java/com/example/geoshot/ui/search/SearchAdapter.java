@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.generalUtilities.imageUtils.ImageUtils;
+import com.example.geoshot.generalUtilities.imageUtils.ImageUtilsPika;
 import com.example.geoshot.ui.search.utils.SearchedUser;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
         SearchedUser item = (SearchedUser) searchedUsersList.get(position);
 
-        ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.searchedUserPhoto);
+        ImageUtilsPika.setImageToViewProfile(context, holder.searchedUserPhoto, item.getPhoto());
         holder.searchedUsername.setText(item.getUsername());
         holder.btnToggleFollowShip.setText(item.getFollowshipState());
     }
