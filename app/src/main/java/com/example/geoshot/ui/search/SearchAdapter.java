@@ -13,7 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.generalUtilities.imageUtils.ImageUtils;
+
+import com.example.geoshot.generalUtilities.put.PutToggleFollowship;
+
 import com.example.geoshot.generalUtilities.imageUtils.ImageUtilsPika;
+
 import com.example.geoshot.ui.search.utils.SearchedUser;
 
 import java.util.ArrayList;
@@ -21,9 +25,11 @@ import java.util.ArrayList;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     Context context;
     ArrayList<SearchedUser> searchedUsersList;
-    public SearchAdapter(Context context, ArrayList<SearchedUser> searchedUsersList) {
+    private final OnFollowClickListener onFollowClickListener;
+    public SearchAdapter(Context context, ArrayList<SearchedUser> searchedUsersList, OnFollowClickListener onFollowClickListener) {
         this.context = context;
         this.searchedUsersList = searchedUsersList;
+        this.onFollowClickListener = onFollowClickListener;
     }
 
     @NonNull
@@ -41,9 +47,24 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
         SearchedUser item = (SearchedUser) searchedUsersList.get(position);
 
+
         ImageUtilsPika.setImageToViewProfile(context, holder.searchedUserPhoto, item.getPhoto());
+
         holder.searchedUsername.setText(item.getUsername());
         holder.btnToggleFollowShip.setText(item.getFollowshipState());
+        holder.btnToggleFollowShip.setOnClickListener(v -> {
+            onFollowClickListener.onItemClick(item.getUsername());
+            if(item.getFollowshipState().equals("Follow")){
+                String troca = "Unfollow";
+                item.setFollowshipState("true");
+                holder.btnToggleFollowShip.setText(troca);
+            }
+            else {
+                String troca = "Follow";
+                item.setFollowshipState("false");
+                holder.btnToggleFollowShip.setText(troca);
+            }
+        });
     }
 
     @Override
@@ -61,5 +82,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             searchedUsername = (TextView) view.findViewById(R.id.searchedUsername);
             btnToggleFollowShip = (Button) view.findViewById(R.id.btnToggleFollowShip);
         }
+    }
+
+    public interface OnFollowClickListener {
+        void onItemClick(String searchedUser);
     }
 }

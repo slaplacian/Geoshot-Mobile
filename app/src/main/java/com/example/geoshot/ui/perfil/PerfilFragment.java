@@ -87,7 +87,7 @@ public class PerfilFragment extends Fragment {
 
         usernameProfile.setText(username);
         accuracyProfile.setText(String.format("%.1f",accuracy)+"%");
-        ImageUtilsPika.setImageToViewProfile(this.getContext(),userPhoto,encodedString);
+
 
     }
 
