@@ -1,4 +1,4 @@
-package com.example.geoshot.generalUtilities.post0;
+package com.example.geoshot.generalUtilities.post;
 
 import java.io.IOException;
 

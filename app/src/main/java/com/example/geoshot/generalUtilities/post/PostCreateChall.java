@@ -1,4 +1,4 @@
-package com.example.geoshot.generalUtilities.post0;
+package com.example.geoshot.generalUtilities.post;
 
 public class PostCreateChall {
     public static String post(String username, String photo, String answer) {

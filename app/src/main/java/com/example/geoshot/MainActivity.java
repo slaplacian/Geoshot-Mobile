@@ -12,9 +12,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.example.geoshot.generalUtilities.APIClient;
+
 import com.example.geoshot.generalUtilities.User;
-import com.example.geoshot.generalUtilities.post0.PostLogin;
+import com.example.geoshot.generalUtilities.post.PostLogin;
 import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
