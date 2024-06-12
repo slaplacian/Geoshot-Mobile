@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.geoshot.R;
 import com.example.geoshot.databinding.FragmentSearchBinding;
-import com.example.geoshot.utils.sqlite.SessionManager;
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 
 public class SearchFragment extends Fragment {
 

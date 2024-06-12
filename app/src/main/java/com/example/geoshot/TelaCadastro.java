@@ -2,6 +2,7 @@ package com.example.geoshot;
 
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.geoshot.generalUtilities.APIClient;
 import com.example.geoshot.generalUtilities.post.PostCadastro;
 import com.example.geoshot.generalUtilities.User;
+import com.example.geoshot.generalUtilities.post0.PostSignup;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,10 +61,12 @@ public class TelaCadastro extends AppCompatActivity {
 
         if (senha.equals(confirmarSenha)) {
             // Cadastrar o usuário no banco de dados
-            APIClient api = new APIClient();
-            api.setPostStrategy(new PostCadastro(user));
-            String response = api.postRequest();
+//            APIClient api = new APIClient();
+//            api.setPostStrategy(new PostCadastro(user));
+//            String response = api.postRequest();
 
+            String response = PostSignup.post(nome,username,email,senha,confirmarSenha);
+            Log.d("GAY",response);
             JSONObject json;
             String message;
             try {

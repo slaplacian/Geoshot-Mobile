@@ -13,8 +13,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.example.geoshot.generalUtilities.APIClient;
-import com.example.geoshot.generalUtilities.post.PostLogin;
 import com.example.geoshot.generalUtilities.User;
+import com.example.geoshot.generalUtilities.post0.PostLogin;
 import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,9 +51,11 @@ public class MainActivity extends AppCompatActivity {
         String pass = senha.getText().toString();
         User user = new User(username, pass);
 
-        APIClient api = new APIClient();
-        api.setPostStrategy(new PostLogin(user));
-        String response = api.postRequest();
+//        APIClient api = new APIClient();
+//        api.setPostStrategy(new PostLogin(user));
+//        String response = api.postRequest();
+
+        String response = PostLogin.post(username,pass);
 
         Log.d("Depurando", "Resposta da API: " + response);
 
@@ -80,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             Intent intent = new Intent(this, BaseActivity.class);
-            intent.putExtra("username", userOnSuccess);
             startActivity(intent);
         }
     }
