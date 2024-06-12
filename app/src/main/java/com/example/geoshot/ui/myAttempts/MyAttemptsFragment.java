@@ -53,7 +53,7 @@ public class MyAttemptsFragment extends Fragment {
         super.onStart();
 
         APIClient api = new APIClient();
-        String response = api.getRequest("xida");
+        String response = api.getRequest("home");
 
         parseJson(response);
     }

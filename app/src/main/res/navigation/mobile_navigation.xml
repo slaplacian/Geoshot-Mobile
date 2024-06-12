@@ -9,7 +9,11 @@
         android:id="@+id/home_fragment"
         android:name="com.example.geoshot.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_fragment_to_solveChallenge_fragment"
+            app:destination="@id/solveChallenge_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/search_fragment"
@@ -31,6 +35,12 @@
         <action
             android:id="@+id/action_perfil_to_editProfile"
             app:destination="@id/editProfile_fragment" />
+        <action
+            android:id="@+id/action_perfil_fragment_to_solvedByMe_fragment"
+            app:destination="@id/solvedByMe_fragment" />
+        <action
+            android:id="@+id/action_perfil_fragment_to_myChallenges_fragment"
+            app:destination="@id/myChallenges_fragment" />
     </fragment>
 
     <fragment
