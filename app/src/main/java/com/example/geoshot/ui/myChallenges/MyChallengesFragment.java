@@ -76,6 +76,10 @@ public class MyChallengesFragment extends Fragment {
                     String photo = row.getString("photo");
                     String correctValue = row.getString("correctValue");
 
+                    String[] values = correctValue.split(",");
+
+                    correctValue = String.format("Lat:%s\nLong:%s",values[0],values[1]);
+
                     int insertIndex = myChallengesList.size();
                     myChallengesList.add(insertIndex, new MyChallengesItem(pubId, ownerUserId, photo, correctValue));
                     Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + myChallengesList.size());
