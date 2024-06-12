@@ -17,6 +17,7 @@ import com.example.geoshot.R;
 import com.example.geoshot.generalUtilities.get.GetMyAttempts;
 import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import com.example.geoshot.ui.myAttempts.utils.MyAttemptItem;
+import com.example.geoshot.generalUtilities.APIClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;

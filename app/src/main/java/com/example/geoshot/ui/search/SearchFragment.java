@@ -53,11 +53,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-
-        APIClient api = new APIClient();
-        String response = api.getRequest("search");
-
-        parseJson(response);
     }
 
     private void parseJson(String jsonText) {
