@@ -1,5 +1,6 @@
 package com.example.geoshot.ui.solveChallenge;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.geoshot.R;
+import com.example.geoshot.generalUtilities.post.PostChall;
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
+import com.example.geoshot.ui.home.HomeFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,6 +32,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class SolveChallengeFragment extends Fragment implements OnMapReadyCallback {
     private LatLng actualLocation = new LatLng(55.6761, 12.5683);
     private SolveChallengeViewModel mViewModel;
+
+    private String pubId;
 
     public static SolveChallengeFragment newInstance() {
         return new SolveChallengeFragment();
@@ -46,14 +53,32 @@ public class SolveChallengeFragment extends Fragment implements OnMapReadyCallba
         findyouButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),
-                        actualLocation.latitude + ", " +
-                                actualLocation.longitude, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),actualLocation.latitude + ", " +actualLocation.longitude, Toast.LENGTH_SHORT).show();
+                String userAnswer = actualLocation.latitude + "," +actualLocation.longitude;
+                String username = SessionManager.getSession(getContext());
+                TextView pubIdSolveChallenge = v.findViewById(R.id.pubIdSolveChallenge);
+                Log.d("DEPURANDO","Cheguei aqui");
+
+                String response = PostChall.post(username,pubId,userAnswer);
+
+                Log.d("DEPURANDO",response);
+
+                goBackToHome();
+
             }
         });
 
         return rootView;
     }
+
+    private void goBackToHome() {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, new HomeFragment())
+//                .addToBackStack(null).commit();
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -62,6 +87,7 @@ public class SolveChallengeFragment extends Fragment implements OnMapReadyCallba
         TextView textView = view.findViewById(R.id.pubIdSolveChallenge);
         if (getArguments() != null) {
             String selectedItem = getArguments().getString("pubId");
+            pubId = selectedItem;
             textView.setText(selectedItem);
         }
     }
