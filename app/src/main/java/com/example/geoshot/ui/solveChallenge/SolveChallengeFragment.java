@@ -50,13 +50,14 @@ public class SolveChallengeFragment extends Fragment implements OnMapReadyCallba
         }
 
         Button findyouButton = rootView.findViewById(R.id.findyou_button);
+        TextView pubIdSolveChallenge = rootView.findViewById(R.id.pubIdSolveChallenge);
+        pubIdSolveChallenge.setVisibility(View.INVISIBLE);
         findyouButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getContext(),actualLocation.latitude + ", " +actualLocation.longitude, Toast.LENGTH_SHORT).show();
                 String userAnswer = actualLocation.latitude + "," +actualLocation.longitude;
                 String username = SessionManager.getSession(getContext());
-                TextView pubIdSolveChallenge = v.findViewById(R.id.pubIdSolveChallenge);
                 Log.d("DEPURANDO","Cheguei aqui");
 
                 String response = PostChall.post(username,pubId,userAnswer);
