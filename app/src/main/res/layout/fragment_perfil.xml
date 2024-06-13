@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/dovens"
         android:text="Username"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -35,6 +36,7 @@
         android:background="@drawable/circle_background"
         android:gravity="center"
         android:text="97.5%"
+        android:textStyle="bold"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
@@ -44,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Meus desafios"
+        android:backgroundTint="#000000"
         android:textSize="18sp" />
 
     <Button
@@ -52,6 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Resolvidos por mim"
+        android:backgroundTint="#000000"
         android:textSize="18sp" />
 
     <Button
@@ -60,15 +64,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Editar perfil"
+        android:backgroundTint="#000000"
         android:textSize="18sp" />
 
     <Button
         android:id="@+id/logout_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Sair"
         android:textSize="18sp"
-        android:textColor="@android:color/holo_red_dark" />
+        android:textColor="#64AFA6"
+        android:backgroundTint="@android:color/transparent" />
 
 </LinearLayout>
