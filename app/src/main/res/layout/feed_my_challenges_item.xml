@@ -4,10 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingHorizontal="15dp"
-    android:paddingVertical="20dp">
-
-
+    android:paddingHorizontal="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_launcher_background"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -30,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingVertical="5dp">
+        android:paddingVertical="2dp">
 
         <TextView
             android:id="@+id/correctValue"
@@ -54,8 +51,8 @@
 
         <Button
             android:id="@+id/btnExcluir"
-            android:layout_width="130dp"
-            android:layout_height="65dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Excluir"
             android:textSize="16sp"
             android:backgroundTint="#F30707"

@@ -66,10 +66,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-
         String username = SessionManager.getSession(this.getContext());
-        String welcometxt = "Bem vindo a sua página inicial, " + username + "!";
-        welcomeText.setText(welcometxt);
         Log.d("Usuario Coletado:",username);
         String response = GetInitialPage.get(username);
 
@@ -88,21 +85,28 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //            Log.d("Depurando", "HomeFragment -> parseJson -> Consegui transformar jsonText em json");
             if(json.has("feedlist") && json.get("feedlist") instanceof JSONArray) {
                 JSONArray feedlist = json.getJSONArray("feedlist");
-                for (int i = 0; i < feedlist.length(); i++) {
+                if (feedlist.length() > 0) {
+                    for (int i = 0; i < feedlist.length(); i++) {
 //                    Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no for");
-                    JSONObject row = feedlist.getJSONObject(i);
-                    int pubId = row.getInt("pubId");
-                    String photo = row.getString("photo");
-                    String userPhoto = row.getString("userPhoto");
-                    String dateOfCreation = row.getString("dateOfCreation");
-                    String username = row.getString("username");
+                        JSONObject row = feedlist.getJSONObject(i);
+                        int pubId = row.getInt("pubId");
+                        String photo = row.getString("photo");
+                        String userPhoto = row.getString("userPhoto");
+                        String dateOfCreation = row.getString("dateOfCreation");
+                        String username = row.getString("username");
 
 
-                    int insertIndex = feedList.size();
-                    feedList.add(insertIndex, new FeedItem(pubId, photo, userPhoto, dateOfCreation, username));
-                    Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + feedList.size());
+                        int insertIndex = feedList.size();
+                        feedList.add(insertIndex, new FeedItem(pubId, photo, userPhoto, dateOfCreation, username));
+                        Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + feedList.size());
 //                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
-                    homeAdapter.notifyItemInserted(insertIndex);
+                        homeAdapter.notifyItemInserted(insertIndex);
+                    }
+                }
+                else {
+                    String username = SessionManager.getSession(this.getContext());
+                    String welcometxt = "Olá, " + username + "! Você não possui nenhuma publicação no feed ainda :(";
+                    welcomeText.setText(welcometxt);
                 }
             } else {
                 Log.d("Depurando", "HomeFragment -> parseJson -> 'feedlist' não é um array ou não existe");

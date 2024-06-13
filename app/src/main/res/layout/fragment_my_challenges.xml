@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,17 +7,32 @@
     tools:context=".ui.myChallenges.MyChallengesFragment">
 
     <TextView
+        android:id="@+id/geoshot_name_feed"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Geoshot"
+        android:textColor="#64AFA6"
+        android:padding="3dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:fontFamily="@font/dovens" />
+
+    <TextView
+        android:id="@+id/noPubsText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="bem vindo ao meus desafios" />
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:text="" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myChallengesRecyclerView"
+        android:layout_below="@id/geoshot_name_feed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        android:textSize="30sp"
-        android:layout_margin="20dp" />
+        android:textSize="30sp" />
 
-</FrameLayout>
+</RelativeLayout>
