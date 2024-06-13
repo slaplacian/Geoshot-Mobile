@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.generalUtilities.delete.DeleteMyChalls;
@@ -34,6 +35,7 @@ public class MyChallengesFragment extends Fragment {
     private MyChallengesAdapter myChallengesAdapter;
     private final ArrayList<MyChallengesItem> myChallengesList = new ArrayList<>();
     String username;
+    private TextView noPubsText;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,6 +54,8 @@ public class MyChallengesFragment extends Fragment {
 
         myChallengesAdapter = new MyChallengesAdapter(getContext(), myChallengesList, this::deletePublication);
         recyclerView.setAdapter(myChallengesAdapter);
+
+        noPubsText = (TextView) view.findViewById(R.id.noPubsText);
     }
 
     public void onStart() {
@@ -70,7 +74,9 @@ public class MyChallengesFragment extends Fragment {
 
             if(json.has("publicationlist") && json.get("publicationlist") instanceof JSONArray) {
                 JSONArray publicationlist = json.getJSONArray("publicationlist");
-
+                if (publicationlist.length() == 0) {
+                    noPubsText.setText("Você ainda não desafiou ninguém!");
+                }
                 for (int i = 0; i < publicationlist.length(); i++) {
                     JSONObject row = publicationlist.getJSONObject(i);
 
