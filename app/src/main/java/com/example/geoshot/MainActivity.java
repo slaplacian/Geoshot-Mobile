@@ -1,5 +1,7 @@
 package com.example.geoshot;
 
+import static com.example.geoshot.generalUtilities.sqlite.SessionManager.getSession;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -44,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new
                 StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        String possibleUsername = SessionManager.getSession(this);
+
+        if(!possibleUsername.isEmpty()) {
+            Intent intent = new Intent(this, BaseActivity.class);
+            startActivity(intent);
+        }
+
+
     }
 
     public void doLogin(View view){

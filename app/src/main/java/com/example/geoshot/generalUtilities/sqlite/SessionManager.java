@@ -1,6 +1,7 @@
 package com.example.geoshot.generalUtilities.sqlite;
 
 import android.content.Context;
+import android.util.Log;
 
 public class SessionManager {
     public static void saveSession(Context context, String username) {
@@ -14,7 +15,15 @@ public class SessionManager {
     }
 
     public static String getSession(Context context) {
-        DBController dbcont = new DBController(context);
-        return dbcont.getUsername();
+        try {
+            DBController dbcont = new DBController(context);
+            return dbcont.getUsername();
+        }
+        catch (Exception e) {
+            Log.d("Error do session", e.getMessage());
+            return "";
+        }
     }
 }
+
+
