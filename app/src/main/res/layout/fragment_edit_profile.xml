@@ -13,6 +13,7 @@
         android:layout_marginTop="8dp"
         android:layout_centerHorizontal="true"
         android:text="Username"
+        android:fontFamily="@font/dovens"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black" />
@@ -35,7 +36,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
         android:text="Trocar foto"
-        android:textColor="@android:color/holo_blue_dark"
+        android:textColor="#64AFA6"
         android:textSize="16sp" />
 
 
@@ -75,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/current_password_editpage"
         android:layout_marginTop="24dp"
-        android:background="@android:color/holo_blue_dark"
+        android:backgroundTint="#64AFA6"
         android:text="TROCAR"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
