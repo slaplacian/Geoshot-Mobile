@@ -71,8 +71,6 @@ public class SearchFragment extends Fragment {
 
         loggedUser = SessionManager.getSession(this.getContext());
         String welcomeText = "Procure seus amigos pelo username, " + loggedUser + "!";
-        searchWelcomeTextView = (TextView) view.findViewById(R.id.searchWelcomeText);
-        searchWelcomeTextView.setText(welcomeText);
     }
 
     private void parseJson(String jsonText) {
