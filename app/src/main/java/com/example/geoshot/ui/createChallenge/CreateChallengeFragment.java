@@ -62,7 +62,6 @@ public class CreateChallengeFragment extends Fragment implements OnMapReadyCallb
 
                 if (imageUri != null) {
                     String encodedString = convertUriToBase64(getActivity(), imageUri);
-                    //Toast.makeText(getActivity(), encodedString, Toast.LENGTH_LONG).show();
                     String usernamec = SessionManager.getSession(getContext());
                     PostCreateChall.post(usernamec,encodedString,ans);
 

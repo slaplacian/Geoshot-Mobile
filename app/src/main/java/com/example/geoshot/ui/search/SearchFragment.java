@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class SearchFragment extends Fragment {
     private RecyclerView recyclerView;
     private SearchAdapter searchAdapter;
-    private final ArrayList<SearchedUser> searchedUsersList = new ArrayList<>();
+    private ArrayList<SearchedUser> searchedUsersList = new ArrayList<>();
     String loggedUser;
     String searchedUsername;
     private EditText searchedUser;
@@ -74,11 +74,13 @@ public class SearchFragment extends Fragment {
     }
 
     private void parseJson(String jsonText) {
-//        Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no parseJson");
+        Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no parseJson");
         try {
             searchedUsersList.clear();
+            int insertIndex = searchedUsersList.size();
+            searchAdapter.notifyItemRemoved(insertIndex);
             JSONObject json = new JSONObject(jsonText);
-
+            Log.d("Depurando", "consegui pegar JSON");
             if(json.getString("status").equals("success") && json.getString("user-not-found").equals("false")){
                 JSONObject user = json.getJSONObject("user");
 
@@ -86,11 +88,13 @@ public class SearchFragment extends Fragment {
                 String searchedUsername = user.getString("username");
                 String searchedUserPhoto = user.getString("photo");
 
-                int insertIndex = searchedUsersList.size();
+                insertIndex = searchedUsersList.size();
                 searchedUsersList.add(insertIndex, new SearchedUser(searchedUsername, searchedUserPhoto, followshipState));
                 Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + searchedUsersList.size());
     //                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
+                Log.d("Depurando", "Estou antes de Notify");
                 searchAdapter.notifyItemInserted(insertIndex);
+                Log.d("Depurando", "Estou depois de Notify");
             }
         } catch (JSONException e ) {
             Log.e("Depurando", "HomeFragment -> parseJson -> JSONException: " + e.getMessage());
@@ -101,10 +105,12 @@ public class SearchFragment extends Fragment {
     private void searchUser() {
         searchedUsername = searchedUser.getText().toString();
         String response = GetSearch.get(loggedUser, searchedUsername);
+        Log.d("serserser",response);
         parseJson(response);
     }
 
     private void toggleFollowship(String searchedUsername){
         String response = PutToggleFollowship.put(this.loggedUser, searchedUsername);
     }
+
 }
