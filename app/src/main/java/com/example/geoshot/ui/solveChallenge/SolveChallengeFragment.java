@@ -73,9 +73,6 @@ public class SolveChallengeFragment extends Fragment implements OnMapReadyCallba
 
     private void goBackToHome() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, new HomeFragment())
-//                .addToBackStack(null).commit();
         getActivity().getSupportFragmentManager().popBackStack();
     }
 

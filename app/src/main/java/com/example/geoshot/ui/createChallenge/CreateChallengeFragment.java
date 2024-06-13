@@ -18,8 +18,11 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.geoshot.R;
+import com.example.geoshot.generalUtilities.post.PostCreateChall;
+import com.example.geoshot.generalUtilities.sqlite.SessionManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -53,11 +56,20 @@ public class CreateChallengeFragment extends Fragment implements OnMapReadyCallb
         createchallButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), actualLocation.latitude + ", " + actualLocation.longitude, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), actualLocation.latitude + "," + actualLocation.longitude, Toast.LENGTH_SHORT).show();
+
+                String ans = actualLocation.latitude + "," + actualLocation.longitude;
 
                 if (imageUri != null) {
                     String encodedString = convertUriToBase64(getActivity(), imageUri);
-                    Toast.makeText(getActivity(), encodedString, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity(), encodedString, Toast.LENGTH_LONG).show();
+                    String usernamec = SessionManager.getSession(getContext());
+                    PostCreateChall.post(usernamec,encodedString,ans);
+
+                    Toast.makeText(getActivity(), "Desafio Criado!", Toast.LENGTH_LONG).show();
+
+                    goBackToHome();
+
                 }
             }
         });
@@ -139,4 +151,10 @@ public class CreateChallengeFragment extends Fragment implements OnMapReadyCallb
         }
         return byteBuffer.toByteArray();
     }
+
+    private void goBackToHome() {
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        getActivity().getSupportFragmentManager().popBackStack();
+    }
+
 }
