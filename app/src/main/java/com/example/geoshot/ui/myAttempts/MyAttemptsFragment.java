@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.geoshot.R;
 import com.example.geoshot.generalUtilities.get.GetMyAttempts;
@@ -30,6 +31,7 @@ public class MyAttemptsFragment extends Fragment {
     private RecyclerView recyclerView;
     private MyAttemptsAdapter myAttemptsAdapter;
     private final ArrayList<MyAttemptItem> myAttemptsList = new ArrayList<>();
+    private TextView noMyAttempts;
 
 
     @Override
@@ -38,7 +40,8 @@ public class MyAttemptsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_my_attempts, container, false);
     }
 
-    public void onCreatedView(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.myAttemptsRecyclerView);
@@ -48,6 +51,8 @@ public class MyAttemptsFragment extends Fragment {
 
         myAttemptsAdapter = new MyAttemptsAdapter(getContext(), myAttemptsList);
         recyclerView.setAdapter(myAttemptsAdapter);
+
+        noMyAttempts = (TextView) view.findViewById(R.id.noMyAttempts);
     }
 
     @Override
@@ -57,19 +62,35 @@ public class MyAttemptsFragment extends Fragment {
         String username = SessionManager.getSession(this.getContext());
         String response = GetMyAttempts.get(username);
 
-        parseJson(response);
+        JSONObject json = null;
+        try {
+            json = new JSONObject(response);
+
+            if(json.has("attemptslist") && json.get("attemptslist") instanceof JSONArray) {
+                JSONArray feedlist = json.getJSONArray("attemptslist");
+                if (feedlist.length() > 0) {
+                    parseJson(response);
+                    recyclerView.setVisibility(View.VISIBLE);
+                    noMyAttempts.setVisibility(View.GONE);
+                }
+                else {
+                    recyclerView.setVisibility(View.GONE);
+                    noMyAttempts.setVisibility(View.VISIBLE);
+                }
+            }
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void parseJson(String jsonText) {
-//        Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no parseJson");
         try {
             myAttemptsList.clear();
             JSONObject json = new JSONObject(jsonText);
-//            Log.d("Depurando", "HomeFragment -> parseJson -> Consegui transformar jsonText em json");
-            if(json.has("attemptslist") && json.get("attemptslist") instanceof JSONArray) {
-                JSONArray feedlist = json.getJSONArray("attemptslist");
+
+            JSONArray feedlist = json.getJSONArray("attemptslist");
+
                 for (int i = 0; i < feedlist.length(); i++) {
-//                    Log.d("Depurando", "HomeFragment -> parseJson -> Entrei no for");
                     JSONObject row = feedlist.getJSONObject(i);
 
                     int pubId = row.getInt("pubId");
@@ -79,16 +100,14 @@ public class MyAttemptsFragment extends Fragment {
                     String userphoto = row.getString("userphoto");
                     String attemptDate = row.getString("attemptDate");
 
-
                     int insertIndex = myAttemptsList.size();
-                    myAttemptsList.add(insertIndex, new MyAttemptItem(pubId, accuracy, username,photo, userphoto, attemptDate));
+                    myAttemptsList.add(insertIndex, new MyAttemptItem(pubId, accuracy, username, photo, userphoto, attemptDate));
                     Log.d("Depurando", "Dentro do for de parse json -> inserido em feedList " + myAttemptsList.size());
-//                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
+                    //                    Log.d("Depurando", "Dentro do for de parse json -> feedList " + feedList.toString());
                     myAttemptsAdapter.notifyItemInserted(insertIndex);
                 }
-            } else {
-                Log.d("Depurando", "HomeFragment -> parseJson -> 'feedlist' não é um array ou não existe");
-            }
+
+
         } catch (JSONException e ) {
             Log.e("Depurando", "HomeFragment -> parseJson -> JSONException: " + e.getMessage());
             throw new RuntimeException(e);

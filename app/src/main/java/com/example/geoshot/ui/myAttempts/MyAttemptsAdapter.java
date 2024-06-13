@@ -30,7 +30,7 @@ public class MyAttemptsAdapter extends RecyclerView.Adapter<MyAttemptsAdapter.Vi
     public MyAttemptsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Utiliza o feed_item_layout.xml definido
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.feed_item_layout, parent, false);
+                .inflate(R.layout.my_attempts_item_layout, parent, false);
 
         MyAttemptsAdapter.ViewHolder viewHolder = new MyAttemptsAdapter.ViewHolder(view);
         return viewHolder;
@@ -40,11 +40,11 @@ public class MyAttemptsAdapter extends RecyclerView.Adapter<MyAttemptsAdapter.Vi
     public void onBindViewHolder(@NonNull MyAttemptsAdapter.ViewHolder holder, int position) {
         MyAttemptItem item = (MyAttemptItem) myAttemptItems.get(position);
 
-        ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImage);
-        ImageUtilsPika.setImageToViewProfile(context,holder.userPhoto,item.getUserphoto());
-        holder.frameUsername.setText(item.getUsername());
-        holder.accuracy.setText(String.valueOf(item.getAccuracy()));
-        holder.pubId.setText(String.valueOf(item.getPubId()));
+        ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImageMyAttempts);
+        ImageUtilsPika.setImageToViewProfile(context,holder.userPhotoMyAttempts,item.getUserphoto());
+        holder.frameUsernameMyAttempts.setText(item.getUsername());
+        String accuracy = "Acurácia: " + item.getAccuracy();
+        holder.accuracyMyAttempts.setText(accuracy);
     }
     @Override
     public int getItemCount() {
@@ -52,15 +52,14 @@ public class MyAttemptsAdapter extends RecyclerView.Adapter<MyAttemptsAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView userPhoto, challengeImage;
-        TextView frameUsername, accuracy, pubId;
+        ImageView userPhotoMyAttempts, challengeImageMyAttempts;
+        TextView frameUsernameMyAttempts, accuracyMyAttempts;
         public ViewHolder(View view) {
             super(view);
-            userPhoto = (ImageView) view.findViewById(R.id.userPhoto);
-            challengeImage = (ImageView) view.findViewById(R.id.challengeImage);
-            frameUsername = (TextView) view.findViewById(R.id.frameUsername);
-            accuracy = (TextView) view.findViewById(R.id.criadoEm);
-            pubId = (TextView) view.findViewById(R.id.pubId);
+            userPhotoMyAttempts = (ImageView) view.findViewById(R.id.userPhotoMyAttempts);
+            challengeImageMyAttempts = (ImageView) view.findViewById(R.id.challengeImageMyAttempts);
+            frameUsernameMyAttempts = (TextView) view.findViewById(R.id.frameUsernameMyAttempts);
+            accuracyMyAttempts = (TextView) view.findViewById(R.id.accuracyMyAttempts);
         }
     }
 }
