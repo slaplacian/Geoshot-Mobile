@@ -62,14 +62,33 @@ public class TelaCadastro extends AppCompatActivity {
             String response = PostSignup.post(nome,username,email,senha,confirmarSenha);
             Log.d("Resposta do Cadastro",response);
             JSONObject json;
+            boolean someerror = false;
+            String error = "";
             String message;
             try {
                 json = new JSONObject(response);
                 message = json.getString("status");
+                if(json.getString("no-password").equals("true")) {
+                    Toast.makeText(this, "Digite a Senha!", Toast.LENGTH_LONG).show();
+                } else if(json.getString("non-equals-password").equals("true")) {
+                    Toast.makeText(this, "As Senhas não são iguais!", Toast.LENGTH_LONG).show();
+                } else if(json.getString("already-username").equals("true")) {
+                    someerror = true;
+                    error += "Usuário já cadastrado!";
+                } else if(json.getString("already-email").equals("true")) {
+                    if(someerror) error += "\n";
+                    error += "E-mail já cadastrado!";
+                    someerror = true;
+                }
+
+                if(someerror) {
+                    Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+                }
+
             } catch (JSONException e) {
                 throw new RuntimeException(e);
             }
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+
             if(message.equals("success")){
                 finish();
             }

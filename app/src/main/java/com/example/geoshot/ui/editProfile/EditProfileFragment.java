@@ -26,7 +26,6 @@ import android.widget.Toast;
 
 import com.example.geoshot.R;
 import com.example.geoshot.generalUtilities.get.GetEditPerfil;
-import com.example.geoshot.generalUtilities.get.GetPerfil;
 import com.example.geoshot.generalUtilities.imageUtils.ImageUtilsPika;
 import com.example.geoshot.generalUtilities.put.PutEditPerfil;
 import com.example.geoshot.generalUtilities.sqlite.SessionManager;
