@@ -43,7 +43,7 @@ public class MyAttemptsAdapter extends RecyclerView.Adapter<MyAttemptsAdapter.Vi
         ImageUtils.setImageToImageView(holder.itemView, item.getPhoto(), holder.challengeImageMyAttempts);
         ImageUtilsPika.setImageToViewProfile(context,holder.userPhotoMyAttempts,item.getUserphoto());
         holder.frameUsernameMyAttempts.setText(item.getUsername());
-        String accuracy = "Acurácia: " + item.getAccuracy();
+        String accuracy = "Acurácia: " + String.format("%.1f",item.getAccuracy()) + "%";
         holder.accuracyMyAttempts.setText(accuracy);
     }
     @Override

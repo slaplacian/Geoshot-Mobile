@@ -33,6 +33,7 @@ public class MyAttemptsFragment extends Fragment {
     private final ArrayList<MyAttemptItem> myAttemptsList = new ArrayList<>();
     private TextView noMyAttempts;
 
+    double accuracy;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -94,7 +95,8 @@ public class MyAttemptsFragment extends Fragment {
                     JSONObject row = feedlist.getJSONObject(i);
 
                     int pubId = row.getInt("pubId");
-                    double accuracy = row.getDouble("accuracy");
+                    accuracy = row.getDouble("accuracy");
+                    Log.d("QuantoVale",String.valueOf(accuracy));
                     String username = row.getString("username");
                     String photo = row.getString("photo");
                     String userphoto = row.getString("userphoto");

@@ -1,7 +1,7 @@
 package com.example.geoshot.generalUtilities;
 
 public class APIClient {
-    protected String host = "172.15.2.239:8080";
+    protected String host = "172.20.10.3:8080";
     protected String endpoint;
 
     public APIClient(String endpoint) {
