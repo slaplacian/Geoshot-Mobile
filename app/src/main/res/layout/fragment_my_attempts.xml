@@ -7,16 +7,15 @@
     tools:context=".ui.myAttempts.MyAttemptsFragment">
 
     <TextView
-        android:id="@+id/welcomeMyAttempts"
-        android:layout_width="wrap_content"
+        android:id="@+id/geoshot_name_feed"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="10dp"
-        android:paddingBottom="0dp"
-        android:paddingTop="15dp"
-        android:layout_alignParentTop="true"
-        android:textSize="20dp"
-        android:layout_centerHorizontal="true"
-        android:text="Aqui estão suas tentativas" />
+        android:text="Geoshot"
+        android:textColor="#64AFA6"
+        android:padding="3dp"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:fontFamily="@font/dovens" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/myAttemptsRecyclerView"
@@ -24,19 +23,20 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
-        android:layout_below="@id/welcomeMyAttempts"
-        android:layout_margin="20dp" />
+        android:layout_below="@id/geoshot_name_feed" />
 
     <TextView
         android:id="@+id/noMyAttempts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingHorizontal="10dp"
-        android:paddingBottom="0dp"
-        android:paddingTop="15dp"
-        android:textSize="24dp"
+        android:paddingTop="3dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
         android:visibility="gone"
-        android:layout_centerInParent="true"
         android:layout_below="@id/myAttemptsRecyclerView"
         android:text="Você não possui nenhuma tentativa" />
 
